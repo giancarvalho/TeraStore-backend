@@ -10,5 +10,3 @@ app.get('/health', (req, res) => {
 });
 
 export default app;
-
-//test
