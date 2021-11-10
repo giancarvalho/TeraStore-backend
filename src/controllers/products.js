@@ -1,17 +1,20 @@
-import { insertProducts } from '../db/products.js';
+import insertProduct from '../queries/insertProduct.js';
+import validateNewProduct from '../validations/newProduct.js';
 
-function getProducts() {}
-
-async function createProducts(req, res) {
+export default async function createProducts(req, res) {
   const productData = req.body;
-
+  const validation = await validateNewProduct(productData);
   try {
-    const id = await insertProducts(productData);
+    if (validation.isInvalid) throw validation.errorCode;
+
+    const id = await insertProduct(productData);
 
     res.status(201).send({ id });
   } catch (error) {
+    if (validation.isInvalid) {
+      return res.status(error).send(validation.errorMessage);
+    }
+
     res.sendStatus(500);
   }
 }
-
-export { getProducts, createProducts };
