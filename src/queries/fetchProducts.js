@@ -8,7 +8,7 @@ export default async function fetchProducts(id) {
   if (id) {
     result = await pool.query(basicQuery + filter, [id]);
   } else {
-    result = await pool.query(basicQuery);
+    result = await pool.query(`${basicQuery} ORDER BY id DESC LIMIT 30;`);
   }
 
   return result.rows;
