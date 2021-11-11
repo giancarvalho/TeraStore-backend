@@ -5,6 +5,8 @@ import updateProduct from '../queries/updateProduct.js';
 export default async function updateStock(req, res) {
   const { id, amount } = req.body;
   try {
+    if (!id || !amount) throw generateErrorMessage(400, 'Bad request');
+
     const product = await fetchProducts(id);
     if (!product.length) throw generateErrorMessage(404, 'Product not found');
 
@@ -16,7 +18,7 @@ export default async function updateStock(req, res) {
     res.sendStatus(200);
   } catch (error) {
     if (error.isInvalid) {
-      return res.sendStatus(error.errorCode).send(error.errorMessage);
+      return res.sendStatus(error.errorCode);
     }
 
     res.sendStatus(500);
