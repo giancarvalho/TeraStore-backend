@@ -6,7 +6,6 @@ export default async function getCategories(req, res) {
 
     res.send(categories);
   } catch (error) {
-    console.log(error);
     res.sendStatus(500);
   }
 }
