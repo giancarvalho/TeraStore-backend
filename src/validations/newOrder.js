@@ -9,24 +9,20 @@ export default async function validateNewOrder(productData, addressData) {
 
   try {
     if (joiValidation.error) {
-      validation = generateErrorMessage(
-        400,
-        joiValidation.error.details[0].message,
-      );
+      validation = generateErrorMessage(400, joiValidation.error.details[0].message);
 
       return validation;
     }
+    const productIds = productData.map((product) => product.id);
+    const uniqProductIds = [...new Set(productIds)];
+    const areProductsRegistered = await fetchProducts(uniqProductIds);
 
-    for (let i = 0; i < productData.length; i += 1) {
-      const isProduct = await fetchProducts(productData[i].id);
+    console.log(areProductsRegistered);
 
-      if (isProduct.length < 1) {
-        validation = generateErrorMessage(
-          400,
-          'Some products are not registered',
-        );
-        return validation;
-      }
+    if (areProductsRegistered.length < uniqProductIds.length) {
+      validation = generateErrorMessage(400, 'Some products are not registered');
+
+      return validation;
     }
 
     return validation;
