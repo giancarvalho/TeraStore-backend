@@ -7,6 +7,7 @@ import getCategories from './controllers/getCategories.js';
 import createOrder from './controllers/createOrder.js';
 import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
+import updateStock from './controllers/updateStock.js';
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.get('/products', getProducts);
 app.post('/products', createProducts);
+app.put('/products/stock', updateStock);
 
 app.get('/categories', getCategories);
 app.post('/categories', createCategory);
