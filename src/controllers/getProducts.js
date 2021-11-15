@@ -7,6 +7,7 @@ export default async function getProducts(req, res) {
 
     res.send(productsFound);
   } catch (error) {
+    console.log(error);
     res.send(500);
   }
 }
