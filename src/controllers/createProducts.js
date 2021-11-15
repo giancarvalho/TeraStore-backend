@@ -11,6 +11,7 @@ export default async function createProducts(req, res) {
 
     res.status(201).send({ id });
   } catch (error) {
+    console.log(error);
     if (validation.isInvalid) {
       return res.status(error).send(validation.errorMessage);
     }
