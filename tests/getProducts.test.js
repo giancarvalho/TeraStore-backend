@@ -28,14 +28,16 @@ describe('GET /products', () => {
   });
 
   it('should return only one item if id is sent', async () => {
-    const result = await supertest(app).get(`/products`).send({ids: [productId]});
-    console.log(result.body)
+    const result = await supertest(app)
+      .get(`/products`)
+      .send({ ids: [productId] });
+
     expect(result.body.length).toEqual(1);
   });
 
   it('should return two items if id is not passed', async () => {
     const result = await supertest(app).get(`/products`);
-
+    console.log(result);
     expect(result.body.length > 0).toEqual(true);
   });
 });
