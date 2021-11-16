@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import generateErrorMessage from '../factories/errorMessageFactory.js';
 import addressSchema from './schemas/addressSchema.js';
 import fetchProducts from '../queries/fetchProducts.js';
@@ -20,8 +19,6 @@ export default async function validateNewOrder(productData, addressData) {
     const uniqProductIds = [...new Set(productIds)];
     const areProductsRegistered = await fetchProducts(uniqProductIds);
 
-    console.log(areProductsRegistered);
-
     if (areProductsRegistered.length < uniqProductIds.length) {
       validation = generateErrorMessage(
         400,
@@ -33,7 +30,6 @@ export default async function validateNewOrder(productData, addressData) {
 
     return validation;
   } catch (error) {
-    console.log(error);
     validation = generateErrorMessage(500, 'unknown error');
 
     return validation;

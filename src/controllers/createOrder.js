@@ -3,6 +3,7 @@ import pool from '../database.js';
 import getTokenData from '../queries/getToken.js';
 import insertOrGetAddress from '../queries/insertOrGetAddress.js';
 import validateNewOrder from '../validations/newOrder.js';
+import insertOrder from '../queries/insertOrder.js';
 
 export default async function createOrder(req, res) {
   const token = req.headers.authorization?.replace('Bearer ', '');
@@ -18,12 +19,7 @@ export default async function createOrder(req, res) {
 
     const addressId = await insertOrGetAddress(addressValues);
 
-    const orderId = (
-      await pool.query(
-        'INSERT INTO orders (client_id, address_id, payment_id) VALUES ($1, $2, $3) RETURNING id',
-        [clientId, addressId, paymentId],
-      )
-    ).rows[0].id;
+    const orderId = await insertOrder(clientId, addressId, paymentId);
 
     products.forEach((product) => {
       const productValue = [product.id, orderId, product.amount];
