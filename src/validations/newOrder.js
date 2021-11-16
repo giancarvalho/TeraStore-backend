@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import generateErrorMessage from '../factories/errorMessageFactory.js';
 import addressSchema from './schemas/addressSchema.js';
 import fetchProducts from '../queries/fetchProducts.js';
