@@ -20,8 +20,6 @@ export default async function validateNewOrder(productData, addressData) {
     const uniqProductIds = [...new Set(productIds)];
     const areProductsRegistered = await fetchProducts(uniqProductIds);
 
-    console.log(areProductsRegistered);
-
     if (areProductsRegistered.length < uniqProductIds.length) {
       validation = generateErrorMessage(
         400,
@@ -33,7 +31,6 @@ export default async function validateNewOrder(productData, addressData) {
 
     return validation;
   } catch (error) {
-    console.log(error);
     validation = generateErrorMessage(500, 'unknown error');
 
     return validation;

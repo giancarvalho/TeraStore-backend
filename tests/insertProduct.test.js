@@ -14,7 +14,7 @@ describe('POST /products', () => {
   beforeAll(async () => {
     categoryId = await insertCategory(generateCategory());
     productData = generateFakeProduct(categoryId);
-    await insertProduct(productData);
+    const result = await insertProduct(productData);
   });
 
   afterAll(async () => {

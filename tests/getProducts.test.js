@@ -19,7 +19,7 @@ describe('GET /products', () => {
       generateFakeProduct(categoryId),
     ];
     productId = await insertProduct(products[0]);
-    await insertProduct(products[1]);
+    const result = await insertProduct(products[1]);
   });
 
   afterAll(async () => {
@@ -37,7 +37,7 @@ describe('GET /products', () => {
 
   it('should return two items if id is not passed', async () => {
     const result = await supertest(app).get(`/products`);
-    console.log(result);
+
     expect(result.body.length > 0).toEqual(true);
   });
 });
