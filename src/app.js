@@ -8,6 +8,8 @@ import createOrder from './controllers/createOrder.js';
 import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
 import updateStock from './controllers/updateStock.js';
+import signIn from './controllers/SignIn.js';
+import signUp from './controllers/signUp.js';
 
 const app = express();
 app.use(express.json());
@@ -25,6 +27,9 @@ app.post('/cart', returnCartProducts);
 app.post('/order', createOrder);
 
 app.get('/form-details', getFormDetails);
+
+app.post('/sign-up', signUp);
+app.post('/sign-in', signIn);
 
 app.get('/health', (req, res) => {
   res.sendStatus(200);

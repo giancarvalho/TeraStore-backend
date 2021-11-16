@@ -1,0 +1,48 @@
+import bcrypt from 'bcrypt';
+import { v4 as tokenGenerator } from 'uuid';
+import createToken from '../queries/createTokens.js';
+import findUser from '../queries/findUser.js';
+import getTokenData from '../queries/getToken.js';
+
+export default async function signIn(req, res) {
+  const userData = req.body;
+
+  try {
+    if (!userData.email || !userData.password) {
+      return res.sendStatus(400);
+    }
+
+    const userSearch = await findUser(userData.email);
+
+    if (userSearch.rowCount === 0) {
+      return res.status(404).send('User is not registered');
+    }
+
+    const user = userSearch.rows[0];
+
+    const correctPassword = bcrypt.compareSync(
+      userData.password,
+      user.password,
+    );
+
+    if (!correctPassword) {
+      return res.status(400).send('Wrong password');
+    }
+
+    const tokenSearch = await getTokenData(user.id);
+
+    let userToken;
+
+    if (tokenSearch.rowCount > 0) {
+      userToken = tokenSearch.rows[0].token;
+    } else {
+      userToken = tokenGenerator();
+
+      await createToken(user.id, userToken);
+    }
+
+    res.send({ name: user.name, token: userToken });
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}

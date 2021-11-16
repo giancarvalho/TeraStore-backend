@@ -9,7 +9,10 @@ export default async function validateNewOrder(productData, addressData) {
 
   try {
     if (joiValidation.error) {
-      validation = generateErrorMessage(400, joiValidation.error.details[0].message);
+      validation = generateErrorMessage(
+        400,
+        joiValidation.error.details[0].message,
+      );
 
       return validation;
     }
@@ -20,13 +23,17 @@ export default async function validateNewOrder(productData, addressData) {
     console.log(areProductsRegistered);
 
     if (areProductsRegistered.length < uniqProductIds.length) {
-      validation = generateErrorMessage(400, 'Some products are not registered');
+      validation = generateErrorMessage(
+        400,
+        'Some products are not registered',
+      );
 
       return validation;
     }
 
     return validation;
   } catch (error) {
+    console.log(error);
     validation = generateErrorMessage(500, 'unknown error');
 
     return validation;

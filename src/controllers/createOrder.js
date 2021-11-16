@@ -36,7 +36,7 @@ export default async function createOrder(req, res) {
       ),
       [],
     );
-    res.sendStatus(201);
+    res.status(201).send({ orderId });
   } catch (error) {
     if (validation.isInvalid) {
       return res.status(error).send(validation.errorMessage);

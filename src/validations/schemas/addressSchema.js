@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const addressSchema = joi.object({
   street: joi.string().min(3).max(200).required(),
-  number: joi.number().min(1).max(10).required(),
+  number: joi.number().min(1).required(),
   complement: joi.string().max(100).allow('').optional(),
   zipcode: joi
     .string()
