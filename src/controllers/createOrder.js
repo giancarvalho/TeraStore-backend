@@ -1,5 +1,6 @@
 import format from 'pg-format';
 import pool from '../database.js';
+import getTokenData from '../queries/getToken.js';
 import insertOrGetAddress from '../queries/insertOrGetAddress.js';
 import validateNewOrder from '../validations/newOrder.js';
 
@@ -13,7 +14,7 @@ export default async function createOrder(req, res) {
 
   try {
     if (validation.isInvalid) throw validation.errorCode;
-    const clientId = 1;
+    const clientId = (await getTokenData(token)).rows[0].client_id;
 
     const addressId = await insertOrGetAddress(addressValues);
 
