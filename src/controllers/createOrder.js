@@ -38,7 +38,7 @@ export default async function createOrder(req, res) {
     if (validation.isInvalid) {
       return res.status(error).send(validation.errorMessage);
     }
-    console.log(error);
+
     res.sendStatus(500);
   }
 }
