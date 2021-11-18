@@ -1,12 +1,12 @@
-import '../src/setup';
-import app from '../src/app';
 import supertest from 'supertest';
+import '../src/setup.js';
+import app from '../src/app.js';
+import pool from '../src/database.js';
 import generateFakeProduct from './factories/productFactory.js';
 import generateCategory from './factories/categoryFactory.js';
-import pool from '../src/database';
-import cleanDatabase from '../src/queries/cleanDatabase';
-import insertCategory from '../src/queries/insertCategory';
-import insertProduct from '../src/queries/insertProduct';
+import cleanDatabase from '../src/queries/cleanDatabase.js';
+import insertCategory from '../src/queries/insertCategory.js';
+import insertProduct from '../src/queries/insertProduct.js';
 
 describe('POST /products', () => {
   let categoryId;
@@ -14,7 +14,7 @@ describe('POST /products', () => {
   beforeAll(async () => {
     categoryId = await insertCategory(generateCategory());
     productData = generateFakeProduct(categoryId);
-    await insertProduct(productData);
+    const result = await insertProduct(productData);
   });
 
   afterAll(async () => {

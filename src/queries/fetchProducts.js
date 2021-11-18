@@ -1,12 +1,21 @@
 import pool from '../database.js';
 
-export default async function fetchProducts(id) {
+export default async function fetchProducts(productsList) {
   const basicQuery = 'SELECT * FROM products';
-  const filter = ' WHERE id = $1';
+  let idPool = '';
   let result;
 
-  if (id) {
-    result = await pool.query(basicQuery + filter, [id]);
+  if (productsList) {
+    productsList.forEach((product, index) => {
+      if (index === productsList.length - 1) {
+        idPool += `$${index + 1}`;
+      } else {
+        idPool += `$${index + 1}, `;
+      }
+    });
+    const filter = ` WHERE id in (${idPool})`;
+
+    result = await pool.query(basicQuery + filter, productsList);
   } else {
     result = await pool.query(`${basicQuery} ORDER BY id DESC LIMIT 30;`);
   }
