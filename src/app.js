@@ -8,7 +8,7 @@ import createOrder from './controllers/createOrder.js';
 import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
 import * as userController from './controllers/userController.js';
-import signIn from './controllers/SignIn.js';
+import * as categoryController from './controllers/categoriesController.js';
 import getProductsByCategory from './controllers/getProductsByCategory.js';
 
 const app = express();
@@ -20,7 +20,7 @@ app.post('/products', createProducts);
 app.get('/category-products', getProductsByCategory);
 
 app.get('/categories', getCategories);
-app.post('/categories', createCategory);
+app.post('/categories', categoryController.create);
 
 app.post('/cart', returnCartProducts);
 
