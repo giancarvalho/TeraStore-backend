@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import createProducts from './controllers/createProducts.js';
-import getProducts from './controllers/getProducts.js';
 import createOrder from './controllers/createOrder.js';
 import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
@@ -16,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/products', productController.getNewest);
-app.post('/products', createProducts);
+app.post('/products', productController.create);
 app.get('/category-products', getProductsByCategory);
 
 app.get('/categories', categoryController.get);

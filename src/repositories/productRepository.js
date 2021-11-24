@@ -28,4 +28,16 @@ async function findNewest() {
   return result.rows;
 }
 
-export { findList, findNewest };
+async function create(productData) {
+  const { name, price, categoryId, image, stock } = productData;
+
+  const result = await pool.query(
+    'INSERT INTO products (name, price, category_id, image, stock) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+
+    [name, price, categoryId, image, stock],
+  );
+
+  return result.rows[0].id;
+}
+
+export { findList, findNewest, create };
