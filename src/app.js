@@ -7,13 +7,15 @@ import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
 import * as userController from './controllers/userController.js';
 import * as categoryController from './controllers/categoriesController.js';
+import * as productController from './controllers/productController.js';
+
 import getProductsByCategory from './controllers/getProductsByCategory.js';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/products', getProducts);
+app.get('/products', productController.getNewest);
 app.post('/products', createProducts);
 app.get('/category-products', getProductsByCategory);
 

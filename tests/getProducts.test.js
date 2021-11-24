@@ -10,7 +10,6 @@ import pool from '../src/database.js';
 
 describe('GET /products', () => {
   let products;
-  let productId;
 
   beforeAll(async () => {
     const categoryId = await insertCategory(generateCategory());
@@ -18,8 +17,8 @@ describe('GET /products', () => {
       generateFakeProduct(categoryId),
       generateFakeProduct(categoryId),
     ];
-    productId = await insertProduct(products[0]);
-    const result = await insertProduct(products[1]);
+    await insertProduct(products[0]);
+    await insertProduct(products[1]);
   });
 
   afterAll(async () => {
@@ -27,17 +26,9 @@ describe('GET /products', () => {
     pool.end();
   });
 
-  it('should return only one item if id is sent', async () => {
-    const result = await supertest(app)
-      .get(`/products`)
-      .send({ ids: [productId] });
-
-    expect(result.body.length).toEqual(1);
-  });
-
-  it('should return two items if id is not passed', async () => {
+  it('should return two items', async () => {
     const result = await supertest(app).get(`/products`);
-
-    expect(result.body.length > 0).toEqual(true);
+    console.log(result.body);
+    expect(result.body.length === 2).toBeTruthy();
   });
 });
