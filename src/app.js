@@ -2,8 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import createProducts from './controllers/createProducts.js';
 import getProducts from './controllers/getProducts.js';
-import createCategory from './controllers/createCategories.js';
-import getCategories from './controllers/getCategories.js';
 import createOrder from './controllers/createOrder.js';
 import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
@@ -19,7 +17,7 @@ app.get('/products', getProducts);
 app.post('/products', createProducts);
 app.get('/category-products', getProductsByCategory);
 
-app.get('/categories', getCategories);
+app.get('/categories', categoryController.get);
 app.post('/categories', categoryController.create);
 
 app.post('/cart', returnCartProducts);

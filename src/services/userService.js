@@ -17,7 +17,7 @@ async function create(user) {
 }
 
 async function authenticate(userData) {
-  const { validation, user } = await userValidation.validate(userData);
+  const { validation, user } = await userValidation.validateAuth(userData);
 
   if (validation.isInvalid) return validation;
 

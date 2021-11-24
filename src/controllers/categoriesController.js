@@ -1,4 +1,3 @@
-import insertCategory from '../queries/insertCategory.js';
 import * as categoryService from '../services/categoryService.js';
 
 async function create(req, res) {
@@ -11,18 +10,15 @@ async function create(req, res) {
       return res.status(category.errorCode).send(category.errorMessage);
     }
 
-    await insertCategory(categoryData.name);
-
     res.sendStatus(201);
   } catch (error) {
-    console.log(error);
     res.sendStatus(500);
   }
 }
 
 async function get(req, res) {
   try {
-    const categories = await fetchCategories();
+    const categories = await categoryService.findAll();
 
     res.send(categories);
   } catch (error) {

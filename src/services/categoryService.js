@@ -1,12 +1,18 @@
-import validateNewCategory from '../validations/newCategory.js';
+import * as categoryValidation from '../validations/categoryValidation.js';
 import * as categoryRepository from '../repositories/categoryRepository.js';
 
 async function create(category) {
-  const validation = await validateNewCategory(category.name);
+  const { validation } = await categoryValidation.validateCreation(
+    category.name,
+  );
 
   if (validation.isInvalid) return validation;
 
   return categoryRepository.create(category.name);
 }
 
-export { create };
+async function findAll() {
+  return categoryRepository.findAll();
+}
+
+export { create, findAll };

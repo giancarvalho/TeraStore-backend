@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import generateErrorMessage from '../factories/errorMessageFactory.js';
 import * as userRepository from '../repositories/userRepository.js';
 
-async function validate(userData) {
+async function validateAuth(userData) {
   let validation = { isInvalid: false };
 
   try {
@@ -38,4 +38,4 @@ async function validate(userData) {
   }
 }
 
-export { validate };
+export { validateAuth };

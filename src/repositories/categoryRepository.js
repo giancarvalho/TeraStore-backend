@@ -11,6 +11,12 @@ async function find(value) {
   return result.rows;
 }
 
+async function findAll() {
+  const result = await pool.query('SELECT * FROM categories;');
+
+  return result.rows;
+}
+
 async function create(name) {
   const result = await pool.query(
     'INSERT INTO categories (name) VALUES ($1) RETURNING id',
@@ -20,4 +26,4 @@ async function create(name) {
   return result.rows[0].id;
 }
 
-export { create, find };
+export { create, find, findAll };
