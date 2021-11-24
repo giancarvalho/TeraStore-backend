@@ -7,8 +7,8 @@ import getCategories from './controllers/getCategories.js';
 import createOrder from './controllers/createOrder.js';
 import returnCartProducts from './controllers/returnCartProducts.js';
 import getFormDetails from './controllers/getFormDetails.js';
+import * as userController from './controllers/userController.js';
 import signIn from './controllers/SignIn.js';
-import signUp from './controllers/signUp.js';
 import getProductsByCategory from './controllers/getProductsByCategory.js';
 
 const app = express();
@@ -28,8 +28,8 @@ app.post('/order', createOrder);
 
 app.get('/form-details', getFormDetails);
 
-app.post('/sign-up', signUp);
-app.post('/sign-in', signIn);
+app.post('/sign-up', userController.signUp);
+app.post('/sign-in', userController.signIn);
 
 app.get('/health', (req, res) => {
   res.sendStatus(200);
