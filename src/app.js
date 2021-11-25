@@ -15,13 +15,12 @@ app.use(cors());
 app.get('/products', productController.getNewest);
 app.post('/products', productController.create);
 app.get('/products/:categoryId', productController.getByCategory);
+app.post('/products/cart', productController.getProductsInCart);
 
 app.get('/categories', categoryController.get);
 app.post('/categories', categoryController.create);
 
-app.post('/cart', returnCartProducts);
-
-app.post('/order', createOrder);
+app.post('/order', auth, createOrder);
 
 app.get('/form-details', auth, formController.get);
 

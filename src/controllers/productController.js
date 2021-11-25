@@ -38,4 +38,21 @@ async function create(req, res) {
   }
 }
 
-export { getNewest, create, getByCategory };
+async function getProductsInCart(req, res) {
+  const { ids } = req.body;
+
+  try {
+    const request = await productService.findList(ids);
+
+    if (request.isInvalid) {
+      return res.status(request.errorCode).send(request.errorMessage || '');
+    }
+
+    res.send(request);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+export { getNewest, create, getByCategory, getProductsInCart };

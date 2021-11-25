@@ -6,8 +6,7 @@ import validateNewOrder from '../validations/newOrder.js';
 import insertOrder from '../queries/insertOrder.js';
 
 export default async function createOrder(req, res) {
-  const token = req.headers.authorization?.replace('Bearer ', '');
-  if (!token) return res.sendStatus(401);
+  const { client_id: clientId } = req.local;
   const { products, address, paymentId } = req.body;
   const addressValues = Object.values(address);
   const productValues = [];
@@ -15,7 +14,6 @@ export default async function createOrder(req, res) {
 
   try {
     if (validation.isInvalid) throw validation.errorCode;
-    const clientId = (await getTokenData(token)).rows[0].client_id;
 
     const addressId = await insertOrGetAddress(addressValues);
 

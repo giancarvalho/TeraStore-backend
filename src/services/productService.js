@@ -22,4 +22,14 @@ async function findByCategory(categoryId) {
   return { name: category.name, products };
 }
 
-export { findNewest, create, findByCategory };
+async function findList(list) {
+  if (!list || !list.length) {
+    return { isInvalid: true, errorCode: 400 };
+  }
+
+  const products = await productRepository.findList(list);
+
+  return products;
+}
+
+export { findNewest, create, findByCategory, findList };
