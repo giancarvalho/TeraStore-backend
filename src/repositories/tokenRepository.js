@@ -8,7 +8,7 @@ async function find(query) {
     [query],
   );
 
-  return result;
+  return result.rows[0];
 }
 
 async function create(id, token) {

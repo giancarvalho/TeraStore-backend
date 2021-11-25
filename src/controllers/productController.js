@@ -11,7 +11,7 @@ async function getNewest(req, res) {
 }
 
 async function getByCategory(req, res) {
-  const { categoryId } = req.query;
+  const { categoryId } = req.params;
 
   try {
     const request = await productService.findByCategory(categoryId);

@@ -21,12 +21,12 @@ async function authenticate(userData) {
 
   if (validation.isInvalid) return validation;
 
-  const tokenSearch = await tokenRepository.find(user.id);
+  const token = await tokenRepository.find(user.id);
 
   let userToken;
 
-  if (tokenSearch.rowCount > 0) {
-    userToken = tokenSearch.rows[0].token;
+  if (token) {
+    userToken = token;
   } else {
     userToken = tokenGenerator();
 
