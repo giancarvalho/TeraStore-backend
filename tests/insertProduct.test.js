@@ -5,16 +5,16 @@ import pool from '../src/database.js';
 import generateFakeProduct from './factories/productFactory.js';
 import generateCategory from './factories/categoryFactory.js';
 import cleanDatabase from '../src/queries/cleanDatabase.js';
-import insertCategory from '../src/queries/insertCategory.js';
-import insertProduct from '../src/queries/insertProduct.js';
+import * as productRepository from '../src/repositories/productRepository.js';
+import * as categoryRepository from '../src/repositories/categoryRepository.js';
 
 describe('POST /products', () => {
   let categoryId;
   let productData;
   beforeAll(async () => {
-    categoryId = await insertCategory(generateCategory());
+    categoryId = await categoryRepository.create(generateCategory());
     productData = generateFakeProduct(categoryId);
-    const result = await insertProduct(productData);
+    await productRepository.create(productData);
   });
 
   afterAll(async () => {

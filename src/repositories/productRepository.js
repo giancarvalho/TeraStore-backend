@@ -37,6 +37,17 @@ async function findByCategory(categoryId) {
   return result.rows;
 }
 
+async function find(value) {
+  const filter = Number(value) ? 'id' : 'name';
+
+  const result = await pool.query(
+    `SELECT * FROM products WHERE ${filter} = $1`,
+    [value],
+  );
+
+  return result.rows;
+}
+
 async function create(productData) {
   const { name, price, categoryId, image, stock } = productData;
 
@@ -49,4 +60,4 @@ async function create(productData) {
   return result.rows[0].id;
 }
 
-export { findList, findNewest, create, findByCategory };
+export { findList, findNewest, create, findByCategory, find };

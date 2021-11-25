@@ -5,12 +5,11 @@ async function signUp(req, res) {
 
   try {
     const result = await userService.create(userData);
-    console.log(result);
+
     if (!result) return res.sendStatus(400);
 
     return res.sendStatus(201);
   } catch (error) {
-    console.log(error);
     return res.sendStatus(500);
   }
 }
@@ -27,7 +26,6 @@ async function signIn(req, res) {
 
     res.send({ name: user.name, token: user.token });
   } catch (error) {
-    console.log(error);
     res.sendStatus(500);
   }
 }

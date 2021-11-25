@@ -1,5 +1,5 @@
 import generateErrorMessage from '../factories/errorMessageFactory.js';
-import fetchCategory from '../queries/fetchCategory.js';
+import * as categoryRepository from '../repositories/categoryRepository.js';
 import newCategorySchema from './schemas/newCategorySchema.js';
 
 export default async function validateNewCategory(category) {
@@ -16,7 +16,7 @@ export default async function validateNewCategory(category) {
       return validation;
     }
 
-    const isExistingCategory = await fetchCategory(category);
+    const isExistingCategory = await categoryRepository.find(category);
 
     if (isExistingCategory.length > 0) {
       validation = generateErrorMessage(409, 'Category is already registered.');

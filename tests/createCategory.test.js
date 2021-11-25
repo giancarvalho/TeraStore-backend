@@ -4,13 +4,13 @@ import app from '../src/app';
 import generateCategory from './factories/categoryFactory';
 import cleanDatabase from '../src/queries/cleanDatabase';
 import pool from '../src/database';
-import insertCategory from '../src/queries/insertCategory';
+import * as categoryRepository from '../src/repositories/categoryRepository.js';
 
 describe('POST /categories', () => {
   let existingCategory;
   beforeAll(async () => {
     existingCategory = generateCategory();
-    await insertCategory(existingCategory);
+    await categoryRepository.create(existingCategory);
   });
 
   afterAll(async () => {

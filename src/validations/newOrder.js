@@ -1,6 +1,6 @@
 import generateErrorMessage from '../factories/errorMessageFactory.js';
 import addressSchema from './schemas/addressSchema.js';
-import fetchProducts from '../queries/fetchProducts.js';
+import * as productRepository from '../repositories/productRepository.js';
 
 export default async function validateNewOrder(productData, addressData) {
   let validation = { isInvalid: false };
@@ -17,7 +17,7 @@ export default async function validateNewOrder(productData, addressData) {
     }
     const productIds = productData.map((product) => product.id);
     const uniqProductIds = [...new Set(productIds)];
-    const areProductsRegistered = await fetchProducts(uniqProductIds);
+    const areProductsRegistered = await productRepository.find(uniqProductIds);
 
     if (areProductsRegistered.length < uniqProductIds.length) {
       validation = generateErrorMessage(
