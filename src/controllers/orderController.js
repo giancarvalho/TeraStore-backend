@@ -18,6 +18,7 @@ async function create(req, res) {
 
     res.status(201).send(request);
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 }

@@ -17,7 +17,9 @@ export default async function validateNewOrder(productData, addressData) {
     }
     const productIds = productData.map((product) => product.id);
     const uniqProductIds = [...new Set(productIds)];
-    const areProductsRegistered = await productRepository.find(uniqProductIds);
+    const areProductsRegistered = await productRepository.findList(
+      uniqProductIds,
+    );
 
     if (areProductsRegistered.length < uniqProductIds.length) {
       validation = generateErrorMessage(
@@ -31,7 +33,7 @@ export default async function validateNewOrder(productData, addressData) {
     return validation;
   } catch (error) {
     validation = generateErrorMessage(500, 'unknown error');
-
+    console.log(error);
     return validation;
   }
 }
