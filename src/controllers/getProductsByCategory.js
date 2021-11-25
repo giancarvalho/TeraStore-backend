@@ -17,6 +17,7 @@ export default async function getProductsByCategory(req, res) {
 
     res.send(result);
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 }

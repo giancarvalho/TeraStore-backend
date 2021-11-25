@@ -28,6 +28,15 @@ async function findNewest() {
   return result.rows;
 }
 
+async function findByCategory(categoryId) {
+  const result = await pool.query(
+    'SELECT * FROM products WHERE category_id = $1',
+    [categoryId],
+  );
+
+  return result.rows;
+}
+
 async function create(productData) {
   const { name, price, categoryId, image, stock } = productData;
 
@@ -40,4 +49,4 @@ async function create(productData) {
   return result.rows[0].id;
 }
 
-export { findList, findNewest, create };
+export { findList, findNewest, create, findByCategory };
