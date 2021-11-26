@@ -1,35 +1,30 @@
 import express from 'express';
 import cors from 'cors';
-import createProducts from './controllers/createProducts.js';
-import getProducts from './controllers/getProducts.js';
-import createCategory from './controllers/createCategories.js';
-import getCategories from './controllers/getCategories.js';
-import createOrder from './controllers/createOrder.js';
-import returnCartProducts from './controllers/returnCartProducts.js';
-import getFormDetails from './controllers/getFormDetails.js';
-import signIn from './controllers/SignIn.js';
-import signUp from './controllers/signUp.js';
-import getProductsByCategory from './controllers/getProductsByCategory.js';
+import auth from './middlewares/auth.js';
+import * as userController from './controllers/userController.js';
+import * as categoryController from './controllers/categoriesController.js';
+import * as productController from './controllers/productController.js';
+import * as formController from './controllers/formController.js';
+import * as orderController from './controllers/orderController.js';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/products', getProducts);
-app.post('/products', createProducts);
-app.get('/category-products', getProductsByCategory);
+app.get('/products', productController.getNewest);
+app.post('/products', productController.create);
+app.get('/products/:categoryId', productController.getByCategory);
+app.post('/products/cart', productController.getProductsInCart);
 
-app.get('/categories', getCategories);
-app.post('/categories', createCategory);
+app.get('/categories', categoryController.get);
+app.post('/categories', categoryController.create);
 
-app.post('/cart', returnCartProducts);
+app.post('/sign-up', userController.signUp);
+app.post('/sign-in', userController.signIn);
 
-app.post('/order', createOrder);
+app.post('/order', auth, orderController.create);
 
-app.get('/form-details', getFormDetails);
-
-app.post('/sign-up', signUp);
-app.post('/sign-in', signIn);
+app.get('/form-details', auth, formController.get);
 
 app.get('/health', (req, res) => {
   res.sendStatus(200);

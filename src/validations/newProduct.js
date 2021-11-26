@@ -1,7 +1,7 @@
 import generateErrorMessage from '../factories/errorMessageFactory.js';
 import productSchema from './schemas/newProductSchema.js';
-import fetchCategory from '../queries/fetchCategory.js';
-import fetchProductByName from '../queries/fetchProductByName.js';
+import * as categoryRepository from '../repositories/categoryRepository.js';
+import * as productRepository from '../repositories/productRepository.js';
 
 export default async function validateNewProduct(productData) {
   const joiValidation = productSchema.validate(productData);
@@ -16,7 +16,7 @@ export default async function validateNewProduct(productData) {
       return validation;
     }
 
-    const isExistingProduct = await fetchProductByName(productData.name);
+    const isExistingProduct = await productRepository.find(productData.name);
 
     if (isExistingProduct.length > 0) {
       validation = generateErrorMessage(409, 'Product is already registered');
@@ -24,7 +24,7 @@ export default async function validateNewProduct(productData) {
       return validation;
     }
 
-    const category = await fetchCategory(productData.categoryId);
+    const category = await categoryRepository.find(productData.categoryId);
 
     if (category.length === 0) {
       validation = generateErrorMessage(400, "Category doesn't exist");

@@ -1,8 +1,8 @@
 import generateErrorMessage from '../factories/errorMessageFactory.js';
-import * as categoryRepository from '../repositories/categoryRepository.js';
 import newCategorySchema from './schemas/newCategorySchema.js';
+import * as categoryRepository from '../repositories/categoryRepository.js';
 
-export default async function validateNewCategory(category) {
+async function validateCreation(category) {
   let validation = { isInvalid: false };
   const joiValidation = newCategorySchema.validate(category);
 
@@ -13,7 +13,7 @@ export default async function validateNewCategory(category) {
         joiValidation.error.details[0].message,
       );
 
-      return validation;
+      return { validation };
     }
 
     const isExistingCategory = await categoryRepository.find(category);
@@ -21,13 +21,15 @@ export default async function validateNewCategory(category) {
     if (isExistingCategory.length > 0) {
       validation = generateErrorMessage(409, 'Category is already registered.');
 
-      return validation;
+      return { validation };
     }
 
-    return validation;
+    return { validation };
   } catch (error) {
     validation = generateErrorMessage(500, 'unknown error');
 
-    return validation;
+    return { validation };
   }
 }
+
+export { validateCreation };
