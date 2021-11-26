@@ -4,9 +4,11 @@ async function signUp(req, res) {
   const userData = req.body;
 
   try {
-    const result = await userService.create(userData);
+    const request = await userService.create(userData);
 
-    if (!result) return res.sendStatus(400);
+    if (request.isInvalid) {
+      return res.status(request.errorCode).send(request.errorMessage);
+    }
 
     return res.sendStatus(201);
   } catch (error) {
@@ -18,13 +20,13 @@ async function signIn(req, res) {
   const userData = req.body;
 
   try {
-    const user = await userService.authenticate(userData);
+    const request = await userService.authenticate(userData);
 
-    if (user.isInvalid) {
-      return res.status(user.errorCode).send(user.errorMessage);
+    if (request.isInvalid) {
+      return res.status(request.errorCode).send(request.errorMessage);
     }
 
-    res.send({ name: user.name, token: user.token });
+    res.send(request);
   } catch (error) {
     res.sendStatus(500);
   }

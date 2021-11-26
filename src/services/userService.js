@@ -7,13 +7,19 @@ import * as userValidation from '../validations/userValidation.js';
 async function create(user) {
   const { name, password, email, cpf } = user;
 
-  if (!name || !password || !email || !cpf) {
-    return null;
-  }
+  const validation = userValidation.validateCreation(user);
 
-  const hashPassword = bcrypt.hashSync(password, 10);
+  if (validation.isInvalid) return validation;
 
-  return userRepository.create({ name, hashPassword, email, cpf });
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  const result = userRepository.create({
+    name,
+    password: hashedPassword,
+    email,
+    cpf,
+  });
+  return result.rows;
 }
 
 async function authenticate(userData) {

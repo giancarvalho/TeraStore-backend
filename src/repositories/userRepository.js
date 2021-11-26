@@ -1,10 +1,10 @@
 import pool from '../database.js';
 
-async function create({ name, cpf, email, hashPassword }) {
+async function create({ name, cpf, email, password }) {
   const { id } = (
     await pool.query(
       'INSERT INTO clients (name, cpf, email, password) VALUES ($1, $2, $3, $4) RETURNING id;',
-      [name, cpf, email, hashPassword],
+      [name, cpf, email, password],
     )
   ).rows[0];
 

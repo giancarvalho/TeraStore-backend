@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import generateErrorMessage from '../factories/errorMessageFactory.js';
 import * as userRepository from '../repositories/userRepository.js';
+import userSchema from './schemas/newUserSchema.js';
 
 async function validateAuth(userData) {
   let validation = { isInvalid: false };
@@ -38,4 +39,37 @@ async function validateAuth(userData) {
   }
 }
 
-export { validateAuth };
+async function validateCreation(userData) {
+  const joiValidation = userSchema.validate(userData);
+  let validation = { isInvalid: false };
+
+  try {
+    if (joiValidation.error) {
+      validation = generateErrorMessage(
+        400,
+        joiValidation.error.details[0].message,
+      );
+
+      return validation;
+    }
+
+    const isUser = await userRepository.find(userData.email);
+
+    if (isUser.rowCount > 0) {
+      validation = generateErrorMessage(
+        409,
+        'This email is already registered.',
+      );
+
+      return validation;
+    }
+
+    return validation;
+  } catch (error) {
+    validation = generateErrorMessage(500, 'Unknown error');
+
+    return validation;
+  }
+}
+
+export { validateAuth, validateCreation };

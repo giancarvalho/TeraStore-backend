@@ -50,7 +50,6 @@ async function getProductsInCart(req, res) {
 
     res.send(request);
   } catch (error) {
-    console.log(error);
     res.sendStatus(500);
   }
 }
