@@ -25,7 +25,9 @@ async function signIn(req, res) {
     const authUserRequest = await userService.authenticate(userData);
 
     if (authUserRequest.isInvalid) {
-      return res.status(authUserRequest.errorCode).send(authUserRequest.errorMessage);
+      return res
+        .status(authUserRequest.errorCode)
+        .send(authUserRequest.errorMessage);
     }
 
     res.send(authUserRequest);

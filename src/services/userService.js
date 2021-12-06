@@ -28,12 +28,12 @@ async function authenticate(userData) {
 
   if (validation.isInvalid) return validation;
 
-  const token = await tokenRepository.find(user.id);
+  const tokenData = await tokenRepository.find(user.id);
 
   let userToken;
-
-  if (token) {
-    userToken = token;
+  console.log(tokenData);
+  if (tokenData) {
+    userToken = tokenData.token;
   } else {
     userToken = tokenGenerator();
 
