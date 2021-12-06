@@ -2,9 +2,9 @@ import * as productService from '../services/productService.js';
 
 async function getNewest(req, res) {
   try {
-    const request = await productService.findNewest();
+    const getNewestRequest = await productService.findNewest();
 
-    res.send(request);
+    res.send(getNewestRequest);
   } catch (error) {
     res.sendStatus(500);
   }

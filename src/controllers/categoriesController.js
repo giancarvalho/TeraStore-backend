@@ -4,10 +4,12 @@ async function create(req, res) {
   const categoryData = req.body;
 
   try {
-    const category = await categoryService.create(categoryData);
+    const createCategoryRequest = await categoryService.create(categoryData);
 
-    if (category.isInvalid) {
-      return res.status(category.errorCode).send(category.errorMessage);
+    if (createCategoryRequest.isInvalid) {
+      return res
+        .status(createCategoryRequest.errorCode)
+        .send(createCategoryRequest.errorMessage);
     }
 
     res.sendStatus(201);

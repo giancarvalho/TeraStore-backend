@@ -2,9 +2,9 @@ import * as formService from '../services/formService.js';
 
 async function get(req, res) {
   try {
-    const request = await formService.get();
+    const getFormDetailsRequest = await formService.get();
 
-    res.send(request);
+    res.send(getFormDetailsRequest);
   } catch (error) {
     res.sendStatus(500);
   }

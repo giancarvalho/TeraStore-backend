@@ -5,18 +5,20 @@ async function create(req, res) {
   const { products, address, paymentId } = req.body;
 
   try {
-    const request = await orderService.create({
+    const createOrderRequest = await orderService.create({
       products,
       clientId,
       paymentId,
       address,
     });
 
-    if (request.isInvalid) {
-      return res.status(request.errorCode).send(request.errorMessage);
+    if (createOrderRequest.isInvalid) {
+      return res
+        .status(createOrderRequest.errorCode)
+        .send(createOrderRequest.errorMessage);
     }
 
-    res.status(201).send(request);
+    res.status(201).send(createOrderRequest);
   } catch (error) {
     res.sendStatus(500);
   }

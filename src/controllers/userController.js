@@ -4,10 +4,12 @@ async function signUp(req, res) {
   const userData = req.body;
 
   try {
-    const request = await userService.create(userData);
+    const createUserRequest = await userService.create(userData);
 
-    if (request.isInvalid) {
-      return res.status(request.errorCode).send(request.errorMessage);
+    if (createUserRequest.isInvalid) {
+      return res
+        .status(createUserRequest.errorCode)
+        .send(createUserRequest.errorMessage);
     }
 
     return res.sendStatus(201);
@@ -20,13 +22,13 @@ async function signIn(req, res) {
   const userData = req.body;
 
   try {
-    const request = await userService.authenticate(userData);
+    const authUserRequest = await userService.authenticate(userData);
 
-    if (request.isInvalid) {
-      return res.status(request.errorCode).send(request.errorMessage);
+    if (authUserRequest.isInvalid) {
+      return res.status(authUserRequest.errorCode).send(authUserRequest.errorMessage);
     }
 
-    res.send(request);
+    res.send(authUserRequest);
   } catch (error) {
     res.sendStatus(500);
   }
