@@ -33,7 +33,7 @@ export default async function validateNewOrder(productData, addressData) {
     return validation;
   } catch (error) {
     validation = generateErrorMessage(500, 'unknown error');
-    console.log(error);
+
     return validation;
   }
 }

@@ -7,13 +7,20 @@ import * as userValidation from '../validations/userValidation.js';
 async function create(user) {
   const { name, password, email, cpf } = user;
 
-  if (!name || !password || !email || !cpf) {
-    return null;
-  }
+  const validation = await userValidation.validateCreation(user);
 
-  const hashPassword = bcrypt.hashSync(password, 10);
+  if (validation.isInvalid) return validation;
 
-  return userRepository.create({ name, hashPassword, email, cpf });
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  const result = await userRepository.create({
+    name,
+    password: hashedPassword,
+    email,
+    cpf,
+  });
+
+  return { id: result };
 }
 
 async function authenticate(userData) {
@@ -21,12 +28,12 @@ async function authenticate(userData) {
 
   if (validation.isInvalid) return validation;
 
-  const token = await tokenRepository.find(user.id);
+  const tokenData = await tokenRepository.find(user.id);
 
   let userToken;
-
-  if (token) {
-    userToken = token;
+  console.log(tokenData);
+  if (tokenData) {
+    userToken = tokenData.token;
   } else {
     userToken = tokenGenerator();
 

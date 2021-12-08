@@ -2,9 +2,9 @@ import * as productService from '../services/productService.js';
 
 async function getNewest(req, res) {
   try {
-    const request = await productService.findNewest();
+    const getNewestRequest = await productService.findNewest();
 
-    res.send(request);
+    res.send(getNewestRequest);
   } catch (error) {
     res.sendStatus(500);
   }
@@ -50,7 +50,6 @@ async function getProductsInCart(req, res) {
 
     res.send(request);
   } catch (error) {
-    console.log(error);
     res.sendStatus(500);
   }
 }
