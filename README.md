@@ -1,21 +1,28 @@
-# template-nodejs
+## TeraStore
 
-## Motivação
+TeraStore is a fictional brazilian ecommerce where you can find the best deals for computers, keyboards, printers and other tech products. 
 
-Esse template diminui a burocracia de criar um server Node.js/Express, possuindo a maior parte das configurações inicias já feitas. O template segue os padrões de projetos da Driven Education.
+The project was made using React and Express/Nodejs and the backend includes authentication, stock control, integration tests and more. 
 
-## Dependencias
+### See the project live [here](https://tera-store-frontend-ten.vercel.app).
 
-### Produção
+![HomeDesktop](https://i.imgur.com/OwnJQHO.png)
+
+<p align="center">
+  <img src="https://i.imgur.com/sC3C5AY.png" />
+</p>
+
+This is a full stack project. You are in the backend repository, you can see the [frontend here](https://github.com/giancarvalho/TeraStore-frontend)
+
+## Technologies
+
+### Production
 - express
 - pg 
 - cors
 - dotenv
 - jest 
 - babel-jest
-- supertest
-- bcrypt
-- uuid
 - joi
 
 ### Dev
@@ -24,23 +31,34 @@ Esse template diminui a burocracia de criar um server Node.js/Express, possuindo
 - nodemon
 - faker
 
-## Como usar?
 
-1- Crie um repositório utilizando esse template ao clicar no botão "use this template" acima. 
+## Requirements
 
-2 -  Dê um ```git clone``` em seu repositorio
+- npm
+- git
+- postgres
 
-3 - Na pasta do projeto, dê um ```npm install```
+## How to use
 
-4 - Adicione seus arquivos .env na pasta raiz
+The easiest way to use the API is to send requests to the following URL: https://terastore.herokuapp.com
 
-5 - Dẽ um ```npm start```
+### Running it locally
 
-6- Opcionalmente, adicione os detalhes do seu projeto no package.json (nome, url, etc)
+1- Clone this repository using ```git clone https://github.com/giancarvalho/TeraStore-backend.git```
 
-Há dois scripts iniciais:
+2 - Run ```npm install``` 
 
-    "start": "NODE_ENV=dev nodemon src/server.js",
+3 - Use the dump.sql to create your postgres database.
+
+4 - Add your .env files (follow the [env.example](https://github.com/giancarvalho/TeraStore-backend/blob/9a7ba8c6f73b3eedcc4308618a9eca07bd02c54e/.env.example) file)
+
+5 - Run ```npm run start:dev```
+
+There are three built-in scripts:
+
+    "start": "NODE_ENV=prod node src/server.js",
+    "start:dev": "NODE_ENV=dev nodemon src/server.js",
     "test": "NODE_ENV=test npx jest"
 
-### Fique a vontade para melhorar esse template ou me dar dicas de como fazer isso.
+---
+This is the 16th project of Driven's Full-stack Web Dev Course. 
