@@ -48,7 +48,7 @@ The easiest way to use the API is to send requests to the following URL: https:/
 
 2 - Run ```npm install``` 
 
-3 - Use the dump.sql to create your postgres database.
+3 - Use the dump.sql to [create your postgres database](https://www.postgresql.org/docs/9.4/backup-dump.html).
 
 4 - Add your .env files (follow the [env.example](https://github.com/giancarvalho/TeraStore-backend/blob/9a7ba8c6f73b3eedcc4308618a9eca07bd02c54e/.env.example) file)
 
