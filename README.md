@@ -52,7 +52,9 @@ The easiest way to use the API is to send requests to the following URL: https:/
 
 4 - Add your .env files (follow the [env.example](https://github.com/giancarvalho/TeraStore-backend/blob/9a7ba8c6f73b3eedcc4308618a9eca07bd02c54e/.env.example) file)
 
-5 - Run ```npm run start:dev```
+5 - Optionally, run ```npm test``` to run integration tests
+
+6 - Run ```npm run start:dev```
 
 There are three built-in scripts:
 
