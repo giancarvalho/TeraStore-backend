@@ -558,11 +558,11 @@ COPY public.clients (id, name, cpf, email, password) FROM stdin;
 5	okay@example.com	12345612325	teste@example.com	$2b$10$rb7wiCH8GcFPNpbMHHGv1uOIMBf79dbg82DWgEjxa8q49VotRIDAW
 6	Teste	12345678921	teste@example.com	$2b$10$gsAB6btEauZewqYAutoI2eISOWZx3v.0E5nSx5vpowraGQJV2w.NC
 7	Gian	12345678921	gian@example.com	$2b$10$u.eVLpXGnRUGVkJGp3kKPeKKjRngkzqOfOuswtaTZEQqbA7DK2OxS
-8	teste	02265164151	dd@example.com	$2b$10$jtZRxSsehov7NO9RUAeRb.QIYOcCQiA.jV3Cjn7ZA7xgT1g3PMxp.
+8	teste	12345678921	dd@example.com	$2b$10$jtZRxSsehov7NO9RUAeRb.QIYOcCQiA.jV3Cjn7ZA7xgT1g3PMxp.
 11	joao	12345678955	joao@example.com	$2b$10$2a2Nnb08WRB/aYt5Ra6Z8e1Z3n87.q8Qpb.2ixUU9NplEi5Tm2Rba
-12	teste@example.com	02265164151	teste@email.com	$2b$10$1jxi/igyM8QXD/wPXZ8tauN6WceiewbonpLV7sk6lZTCxKn9U.xO2
+12	teste@example.com	12345678921	teste@email.com	$2b$10$1jxi/igyM8QXD/wPXZ8tauN6WceiewbonpLV7sk6lZTCxKn9U.xO2
 13	testeee@example.com	12345678900	email@example.com	$2b$10$CSnq72pJndDcoRfmWCQbVeb8pm3KrL2wZu6eNDCC6S.W0mfyQRIpu
-14	Nope	02265164151	nope@example.com	$2b$10$WiPi2Z1TNWf6HkP6JrkUyOtQvRkN3NjNjNDq92.6OGUTbyTTUphvW
+14	Nope	12345678921	nope@example.com	$2b$10$WiPi2Z1TNWf6HkP6JrkUyOtQvRkN3NjNjNDq92.6OGUTbyTTUphvW
 15	teste	12345678966	ops@example.com	$2b$10$AF1jYTZCVKNZVvqjgwTWPuEUUQeMeHO6znSrAJQYe62aKU3wpfLB.
 \.
 
