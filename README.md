@@ -62,5 +62,3 @@ There are three built-in scripts:
     "start:dev": "NODE_ENV=dev nodemon src/server.js",
     "test": "NODE_ENV=test npx jest"
 
----
-This is the 16th project of Driven's Full-stack Web Dev Course. 
